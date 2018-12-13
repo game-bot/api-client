@@ -1,4 +1,4 @@
-export type GamePlayer = { id: string, gameId: string, identity: string, userId: string, status: string, createdAt: string } 
+export type GamePlayer = { id: string, gameId: string, identity: string, userId?: string, status: string, createdAt: string } 
 
 export type InputListGamePlayerQueryParams = { gameId: string, limit: number, status?: string, skip?: number } 
 
