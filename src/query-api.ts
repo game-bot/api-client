@@ -1,6 +1,6 @@
 
 import { GraphQlQuery } from "./graphql-query";
-import { GamePlayer, InputListGamePlayerQueryParams } from './api-types';
+import { GamePlayer, InputListGamePlayerQueryParams, InputLatestGameJobLogQueryParams } from './api-types';
 import { IGraphQlQueryExecutor, GraphQlQueryItemInput, IDataMapper } from "./graphql";
 
 export class QueryApi<T> extends GraphQlQuery<T, QueryMethods> {
@@ -55,11 +55,28 @@ mapper?:IDataMapper<MR, GamePlayer[]>) {
                 ]
             })
     }
+
+latestGameJobLogs<MR>(key:keyof T,
+data:GraphQlQueryItemInput,
+args:{ params: InputLatestGameJobLogQueryParams } ,
+mapper?:IDataMapper<MR, GamePlayer[]>) {
+        
+        return this.queryAddItem(key,
+            {
+                fields: data.fields,
+                name: QueryMethods.latestGameJobLogs,
+                mapper: mapper,
+                variables: [
+                    { name: 'params', value: args.params, type: 'InputLatestGameJobLogQueryParams!' }
+                ]
+            })
+    }
 }
     
 
 export enum QueryMethods {
     gamePlayerById = "gamePlayerById",
     gamePlayerByIdentity = "gamePlayerByIdentity",
-    gamePlayerList = "gamePlayerList"
+    gamePlayerList = "gamePlayerList",
+    latestGameJobLogs = "latestGameJobLogs"
 }

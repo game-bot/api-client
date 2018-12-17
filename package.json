@@ -1,6 +1,6 @@
 {
   "name": "@gamebot/api-client",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "gamebot api client",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
@@ -16,8 +16,8 @@
     "clean": "rimraf ./lib && rimraf ./types",
     "clean-test-code": "rimraf ./lib/**/*.test.js && rimraf ./types/**/*.test.d.ts",
     "generate-schema": "apollo-codegen introspect-schema http://localhost:41850/graphql --output schema.json",
-    "generate-types": "tsc && node ./lib/scripts/generate-types.js",
-    "generate-api": "tsc && node ./lib/scripts/generate-api.js",
+    "generate-types": "node ./lib/scripts/generate-types.js",
+    "generate-api": "node ./lib/scripts/generate-api.js",
     "generate": "yarn generate-schema && yarn generate-types && yarn generate-api && yarn clean && yarn tsc"
   },
   "engines": {

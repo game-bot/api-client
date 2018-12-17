@@ -1,24 +1,57 @@
 
 import { GraphQlQuery } from "./graphql-query";
-import {  } from './api-types';
-import { IGraphQlQueryExecutor,  IDataMapper } from "./graphql";
+import { InputGameJobLog, GameJobLog, InputCreateGamePlayerParams, GamePlayer } from './api-types';
+import { IGraphQlQueryExecutor, GraphQlQueryItemInput, IDataMapper } from "./graphql";
 
 export class MutationApi<T> extends GraphQlQuery<T, MutationMethods> {
     constructor(executor: IGraphQlQueryExecutor<MutationMethods>) {
         super(executor, 'mutation');
     }
-    add<MR>(key:keyof T,
-args:{ n1: number, n2: number } ,
-mapper?:IDataMapper<MR, number>) {
+    createGameJobLog<MR>(key:keyof T,
+data:GraphQlQueryItemInput,
+args:{ params?: InputGameJobLog } ,
+mapper?:IDataMapper<MR, GameJobLog>) {
         
         return this.queryAddItem(key,
             {
-                
-                name: MutationMethods.add,
+                fields: data.fields,
+                name: MutationMethods.createGameJobLog,
                 mapper: mapper,
                 variables: [
-                    { name: 'n1', value: args.n1, type: 'Int!' },
-{ name: 'n2', value: args.n2, type: 'Int!' }
+                    { name: 'params', value: args.params, type: 'InputGameJobLog' }
+                ]
+            })
+    }
+
+createGamePlayer<MR>(key:keyof T,
+data:GraphQlQueryItemInput,
+args:{ params?: InputCreateGamePlayerParams } ,
+mapper?:IDataMapper<MR, GamePlayer>) {
+        
+        return this.queryAddItem(key,
+            {
+                fields: data.fields,
+                name: MutationMethods.createGamePlayer,
+                mapper: mapper,
+                variables: [
+                    { name: 'params', value: args.params, type: 'InputCreateGamePlayerParams' }
+                ]
+            })
+    }
+
+changeGamePlayerStatus<MR>(key:keyof T,
+data:GraphQlQueryItemInput,
+args:{ id: string, status: string } ,
+mapper?:IDataMapper<MR, GamePlayer>) {
+        
+        return this.queryAddItem(key,
+            {
+                fields: data.fields,
+                name: MutationMethods.changeGamePlayerStatus,
+                mapper: mapper,
+                variables: [
+                    { name: 'id', value: args.id, type: 'String!' },
+{ name: 'status', value: args.status, type: 'String!' }
                 ]
             })
     }
@@ -26,5 +59,7 @@ mapper?:IDataMapper<MR, number>) {
     
 
 export enum MutationMethods {
-    add = "add"
+    createGameJobLog = "createGameJobLog",
+    createGamePlayer = "createGamePlayer",
+    changeGamePlayerStatus = "changeGamePlayerStatus"
 }
