@@ -1,6 +1,17 @@
-// import { GraphQlQuery } from "./graphql-query";
+
+import { QueryApi } from './query-api';
+import { MutationApi } from './mutation-api';
+import { IGraphQlQueryExecutor } from 'graphql-client-ts';
 
 
-// export class GraphQLClient<Q extends GraphQlQuery, M extends GraphQlQuery> {
-//     constructor(readonly query: Q, readonly mutation: M) { }
-// }
+export class GraphQLClient {
+    constructor(protected readonly executor: IGraphQlQueryExecutor) { }
+
+    query<T extends {}>() {
+        return new QueryApi<T>(this.executor);
+    }
+
+    mutation<T extends {}>() {
+        return new MutationApi<T>(this.executor);
+    }
+}

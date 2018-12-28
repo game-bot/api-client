@@ -1,10 +1,15 @@
+export enum MutationMethods {
+    createGameJobLog = "createGameJobLog",
+    createGamePlayer = "createGamePlayer",
+    changeGamePlayerStatus = "changeGamePlayerStatus"
+}
 
-import { GraphQlQuery } from "./graphql-query";
+
 import { InputGameJobLog, GameJobLog, InputCreateGamePlayerParams, GamePlayer } from './api-types';
-import { IGraphQlQueryExecutor, GraphQlQueryItemInput, IDataMapper } from "./graphql";
+import { GraphQlQuery, IGraphQlQueryExecutor, GraphQlQueryItemInput, IDataMapper } from 'graphql-client-ts';
 
 export class MutationApi<T> extends GraphQlQuery<T, MutationMethods> {
-    constructor(executor: IGraphQlQueryExecutor<MutationMethods>) {
+    constructor(executor: IGraphQlQueryExecutor) {
         super(executor, 'mutation');
     }
     createGameJobLog<MR>(key:keyof T,
@@ -57,9 +62,3 @@ mapper?:IDataMapper<MR, GamePlayer>) {
     }
 }
     
-
-export enum MutationMethods {
-    createGameJobLog = "createGameJobLog",
-    createGamePlayer = "createGamePlayer",
-    changeGamePlayerStatus = "changeGamePlayerStatus"
-}

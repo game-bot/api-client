@@ -1,6 +1,6 @@
 {
   "name": "@gamebot/api-client",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "gamebot api client",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
@@ -14,14 +14,10 @@
     "postversion": "git push --follow-tags",
     "prepublishOnly": "npm run tsc && npm run clean-test-code",
     "clean": "rimraf ./lib && rimraf ./types",
-    "clean-test-code": "rimraf ./lib/**/*.test.js && rimraf ./types/**/*.test.d.ts",
-    "generate-schema": "apollo-codegen introspect-schema http://localhost:41850/graphql --output schema.json",
-    "generate-types": "node ./lib/scripts/generate-types.js",
-    "generate-api": "node ./lib/scripts/generate-api.js",
-    "generate": "yarn generate-schema && yarn generate-types && yarn generate-api && yarn clean && yarn tsc"
+    "clean-test-code": "rimraf ./lib/**/*.test.js && rimraf ./types/**/*.test.d.ts"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=8.0.0"
   },
   "repository": {
     "type": "git",
@@ -38,17 +34,13 @@
   },
   "homepage": "https://github.com/game-bot/api-client#readme",
   "devDependencies": {
-    "@types/lru-cache": "^4.1.1",
     "@types/node": "10.12.7",
-    "@types/node-fetch": "^2.1.2",
-    "apollo-codegen": "^0.20.2",
     "ava": "^0.25.0",
     "debug": "^4.1.0",
     "rimraf": "^2.6.2",
     "typescript": "3.1.6"
   },
   "dependencies": {
-    "lru-cache": "^5.1.1",
-    "node-fetch": "^2.3.0"
+    "graphql-client-ts": "^0.0.1"
   }
 }
